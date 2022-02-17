@@ -1,0 +1,32 @@
+<ur style="color: green">
+<p><%= flash[:notice] %></p>
+</ur>
+
+<div class = "container px-5 px-sm-0">
+  <div class = "row">
+    <div class = "col-md-3">
+     <%= render 'users/user_show', user:@user %>
+     <%= render 'books/book_new', book:@book_new %>
+    </div>
+    <div class = "col-md-8 offset-md-1">
+     <h2>Book detail</h2>
+      <table class="table table-hover table-inverse">
+       <tbody>
+        <tr>
+        <td>
+         <%= attachment_image_tag @user, :profile_image, size: "60x60", fallback: "no_image.png" %>
+         <br><%= link_to @user.name, user_path(@user)%>
+        </td>
+        <td><%= link_to @book.title %></td>
+        <td><%= @book.body %></td>
+        <% if @book.user == current_user %>
+        <td><%= link_to "Edit", edit_book_path(@book), class: 'btn btn-sm btn-success' %></td>
+        <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger' %></td>
+        </td>
+        </tr>
+        <% end %>
+       </tbody>
+     </table>
+    </div>
+  </div>
+</div>
